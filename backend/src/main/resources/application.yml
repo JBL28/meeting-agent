@@ -44,6 +44,11 @@ notion:
 integration:
   token-encryption-key: ${INTEGRATION_TOKEN_ENCRYPTION_KEY:}
 
+jwt:
+  secret: ${JWT_SECRET:bWVldGluZy1hZ2VudC1kZXZlbG9wbWVudC1qd3Qtc2VjcmV0LWtleS0zMi1ieXRlcy1taW4=}
+  access-token-seconds: ${JWT_ACCESS_TOKEN_SECONDS:3600}
+  refresh-token-seconds: ${JWT_REFRESH_TOKEN_SECONDS:604800}
+
 logging:
   level:
     root: INFO

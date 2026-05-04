@@ -3,6 +3,7 @@ package com.ssafy.meeting.common.exception;
 import com.ssafy.meeting.common.api.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleForbidden(ForbiddenException exception) {
         log.warn("Forbidden request: {}", exception.getMessage());
         return error(HttpStatus.FORBIDDEN, "FORBIDDEN", exception.getMessage());
+    }
+
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<Void>> handleAccessDenied(AccessDeniedException exception) {
+        log.warn("Access denied: {}", exception.getMessage());
+        return error(HttpStatus.FORBIDDEN, "FORBIDDEN", "Insufficient permission");
     }
 
     @ExceptionHandler({ValidationException.class, MethodArgumentNotValidException.class})

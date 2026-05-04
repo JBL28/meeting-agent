@@ -21,8 +21,23 @@ const buttonVariants = cva(
   },
 );
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  };
 
-export function Button({ className, variant, size, ...props }: ButtonProps) {
-  return <button className={cn(buttonVariants({ variant, size, className }))} {...props} />;
+export function Button({ className, variant, size, asChild, children, ...props }: ButtonProps) {
+  const mergedClassName = cn(buttonVariants({ variant, size, className }));
+
+  if (asChild && React.isValidElement<{ className?: string }>(children)) {
+    return React.cloneElement(children, {
+      className: cn(mergedClassName, children.props.className),
+    });
+  }
+
+  return (
+    <button className={mergedClassName} {...props}>
+      {children}
+    </button>
+  );
 }
