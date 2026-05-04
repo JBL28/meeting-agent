@@ -31,6 +31,12 @@ public class GlobalExceptionHandler {
         return error(HttpStatus.FORBIDDEN, "FORBIDDEN", exception.getMessage());
     }
 
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ApiResponse<Void>> handleConflict(ConflictException exception) {
+        log.warn("Conflict request: {}", exception.getMessage());
+        return error(HttpStatus.CONFLICT, "CONFLICT", exception.getMessage());
+    }
+
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<Void>> handleAccessDenied(AccessDeniedException exception) {

@@ -71,6 +71,14 @@ public class Meeting {
         this.status = MeetingStatus.RECORDING;
     }
 
+    public void markTranscribing() {
+        this.status = MeetingStatus.TRANSCRIBING;
+    }
+
+    public void markTranscribed() {
+        this.status = MeetingStatus.TRANSCRIBED;
+    }
+
     public Long getId() { return id; }
     public Team getTeam() { return team; }
     public String getTitle() { return title; }

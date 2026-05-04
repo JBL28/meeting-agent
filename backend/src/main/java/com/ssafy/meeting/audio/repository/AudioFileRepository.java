@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface AudioFileRepository extends JpaRepository<AudioFile, Long> {
     @EntityGraph(attributePaths = {"meeting", "meeting.team"})
     Optional<AudioFile> findWithMeetingById(Long id);
+
+    @EntityGraph(attributePaths = {"meeting", "meeting.team"})
+    Optional<AudioFile> findFirstByMeetingIdOrderByUploadedAtDesc(Long meetingId);
 }

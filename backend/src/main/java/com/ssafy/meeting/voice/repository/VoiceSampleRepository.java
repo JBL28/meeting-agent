@@ -12,4 +12,6 @@ public interface VoiceSampleRepository extends JpaRepository<VoiceSample, Long> 
 
     @EntityGraph(attributePaths = {"member", "team"})
     Optional<VoiceSample> findWithMemberAndTeamById(Long id);
+
+    Optional<VoiceSample> findFirstByTeamIdAndMemberIdOrderByCreatedAtDesc(Long teamId, Long memberId);
 }

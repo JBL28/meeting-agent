@@ -66,6 +66,42 @@ export type AudioFile = {
   uploadedAt: string | null;
 };
 
+export type TranscriptionJobStatus = 'CREATED' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'CANCELED';
+
+export type TranscriptionJob = {
+  id: number;
+  meetingId: number;
+  audioFileId: number;
+  status: TranscriptionJobStatus;
+  errorMessage: string | null;
+  rawResponsePath: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  createdAt: string | null;
+};
+
+export type TranscriptionJobStart = {
+  jobId: number;
+};
+
+export type TranscriptSegment = {
+  id: number;
+  speaker: string;
+  memberId: number | null;
+  startTime: number;
+  endTime: number;
+  text: string;
+  sequence: number;
+};
+
+export type SpeakerMapping = {
+  id: number;
+  speaker: string;
+  memberId: number;
+  memberName: string;
+  autoMapped: boolean;
+};
+
 export function canInvite(role: TeamRole) {
   return role === 'OWNER' || role === 'ADMIN';
 }
