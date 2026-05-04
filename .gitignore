@@ -1,0 +1,31 @@
+﻿# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Gradle / Java
+.gradle/
+build/
+backend/.gradle/
+backend/build/
+
+# Runtime logs
+*.log
+
+# Local env and data
+.env
+.env.local
+.env.*.local
+data/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# OMX local runtime state
+.omx/
+.omc/
+
