@@ -79,6 +79,10 @@ public class Meeting {
         this.status = MeetingStatus.TRANSCRIBED;
     }
 
+    public void markMinutesGenerated() {
+        this.status = MeetingStatus.MINUTES_GENERATED;
+    }
+
     public Long getId() { return id; }
     public Team getTeam() { return team; }
     public String getTitle() { return title; }

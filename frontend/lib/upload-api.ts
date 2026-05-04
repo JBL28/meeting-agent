@@ -1,5 +1,5 @@
 import { apiFetch } from './api';
-import type { AudioFile, Meeting, MeetingParticipant, SpeakerMapping, TranscriptSegment, TranscriptionJob, TranscriptionJobStart, VoiceSample } from './domain';
+import type { ActionItemStatus, AudioFile, Meeting, MeetingMinutes, MeetingParticipant, MeetingSearchResult, MinutesActionItem, MinutesGenerationJob, MinutesGenerationJobStart, Page, SpeakerMapping, TranscriptSegment, TranscriptionJob, TranscriptionJobStart, VoiceSample } from './domain';
 
 export function uploadVoiceSample(teamId: string | number, memberId: string | number, input: { file: File; consent: boolean }) {
   const formData = new FormData();
@@ -77,4 +77,41 @@ export function saveSpeakerMappings(jobId: string | number, mappings: Array<{ sp
     method: 'POST',
     body: JSON.stringify({ mappings }),
   });
+}
+
+export function startMinutesGeneration(meetingId: string | number) {
+  return apiFetch<MinutesGenerationJobStart>(`/api/meetings/${meetingId}/minutes/generate`, {
+    method: 'POST',
+  });
+}
+
+export function getMinutesGenerationJob(jobId: string | number) {
+  return apiFetch<MinutesGenerationJob>(`/api/minutes-generation-jobs/${jobId}`);
+}
+
+export function getMeetingMinutes(meetingId: string | number) {
+  return apiFetch<MeetingMinutes>(`/api/meetings/${meetingId}/minutes`);
+}
+
+export function updateMeetingMinutes(meetingId: string | number, input: { title: string; fullSummary: string }) {
+  return apiFetch<MeetingMinutes>(`/api/meetings/${meetingId}/minutes`, {
+    method: 'PUT',
+    body: JSON.stringify(input),
+  });
+}
+
+export function listMinutesSegments(meetingId: string | number) {
+  return apiFetch<TranscriptSegment[]>(`/api/meetings/${meetingId}/minutes/segments`);
+}
+
+export function updateActionItemStatus(actionItemId: string | number, status: ActionItemStatus) {
+  return apiFetch<MinutesActionItem>(`/api/action-items/${actionItemId}/status`, {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+  });
+}
+
+export function searchMeetings(teamId: string | number, keyword: string, page = 0, size = 20) {
+  const params = new URLSearchParams({ keyword, page: String(page), size: String(size) });
+  return apiFetch<Page<MeetingSearchResult>>(`/api/teams/${teamId}/meetings/search?${params.toString()}`);
 }

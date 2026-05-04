@@ -15,4 +15,6 @@ public interface TranscriptionJobRepository extends JpaRepository<TranscriptionJ
     Optional<TranscriptionJob> findWithMeetingAndAudioFileById(Long id);
 
     List<TranscriptionJob> findAllByMeetingIdOrderByCreatedAtDesc(Long meetingId);
+
+    Optional<TranscriptionJob> findFirstByMeetingIdAndStatusOrderByCreatedAtDesc(Long meetingId, TranscriptionJobStatus status);
 }

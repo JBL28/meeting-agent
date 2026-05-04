@@ -42,6 +42,7 @@ export default function TeamsPage() {
             <div className="mt-4 flex gap-3 text-sm font-semibold text-primary">
               <Link href={`/teams/${team.id}/settings`}>Settings</Link>
               <Link href={`/teams/${team.id}/profile`}>Voice Samples</Link>
+              <Link href={`/teams/${team.id}/search`}>Search</Link>
             </div>
           </div>
         ))}

@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TranscriptSegmentRepository extends JpaRepository<TranscriptSegment, Long> {
     @EntityGraph(attributePaths = {"member"})
     List<TranscriptSegment> findAllByTranscriptionJobIdOrderBySequenceAsc(Long transcriptionJobId);
+
+    @EntityGraph(attributePaths = {"member", "transcriptionJob", "transcriptionJob.meeting"})
+    List<TranscriptSegment> findByTranscriptionJobMeetingTeamIdAndTextContainingIgnoreCase(Long teamId, String keyword);
 }

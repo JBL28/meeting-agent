@@ -102,6 +102,72 @@ export type SpeakerMapping = {
   autoMapped: boolean;
 };
 
+export type MinutesGenerationJobStatus = 'CREATED' | 'PROCESSING' | 'COMPLETED' | 'FAILED';
+
+export type MinutesGenerationJob = {
+  id: number;
+  meetingId: number;
+  status: MinutesGenerationJobStatus;
+  errorMessage: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  createdAt: string | null;
+};
+
+export type MinutesGenerationJobStart = {
+  jobId: number;
+};
+
+export type ActionItemStatus = 'TODO' | 'IN_PROGRESS' | 'DONE';
+
+export type MinutesActionItem = {
+  id: number;
+  assigneeId: number | null;
+  assigneeName: string | null;
+  content: string;
+  dueDate: string | null;
+  status: ActionItemStatus;
+};
+
+export type MemberMinutesSummary = {
+  id: number;
+  memberId: number;
+  memberName: string;
+  progress: string;
+  issues: string;
+  nextTasks: string;
+};
+
+export type MeetingMinutes = {
+  id: number;
+  meetingId: number;
+  generationJobId: number;
+  title: string;
+  meetingDate: string | null;
+  fullSummary: string;
+  decisions: string[];
+  memberSummaries: MemberMinutesSummary[];
+  actionItems: MinutesActionItem[];
+  createdAt: string | null;
+  updatedAt: string | null;
+};
+
+export type MeetingSearchResult = {
+  meetingId: number;
+  title: string;
+  status: MeetingStatus;
+  snippet: string;
+  createdAt: string | null;
+};
+
+export type Page<T> = {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+};
+
 export function canInvite(role: TeamRole) {
   return role === 'OWNER' || role === 'ADMIN';
 }

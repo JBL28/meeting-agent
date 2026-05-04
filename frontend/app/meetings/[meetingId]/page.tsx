@@ -141,6 +141,9 @@ export default function MeetingDetailPage() {
         <Link className="mt-4 inline-flex text-sm font-medium text-slate-700 underline" href={`/meetings/${meetingId}/record`}>
           Open browser recorder
         </Link>
+        <Link className="ml-4 mt-4 inline-flex text-sm font-medium text-slate-700 underline" href={`/meetings/${meetingId}/minutes`}>
+          Open minutes
+        </Link>
       </section>
       {message ? <p className="rounded-md bg-green-50 p-3 text-sm text-green-700">{message}</p> : null}
       {error ? <p className="rounded-md bg-red-50 p-3 text-sm text-red-600">{error}</p> : null}
