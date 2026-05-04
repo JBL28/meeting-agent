@@ -30,6 +30,12 @@ export function getMeeting(meetingId: string | number) {
   return apiFetch<Meeting>(`/api/meetings/${meetingId}`);
 }
 
+export function markMeetingRecording(meetingId: string | number) {
+  return apiFetch<Meeting>(`/api/meetings/${meetingId}/recording`, {
+    method: 'POST',
+  });
+}
+
 export function addMeetingParticipant(meetingId: string | number, memberId: number) {
   return apiFetch<MeetingParticipant>(`/api/meetings/${meetingId}/participants`, {
     method: 'POST',

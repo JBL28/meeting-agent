@@ -64,6 +64,10 @@ class PhaseTwoAApiIntegrationTest {
             .andExpect(status().isForbidden());
 
         Long meetingId = createMeeting(ownerToken, teamId, "Phase 2A Meeting");
+        mockMvc.perform(post("/api/meetings/" + meetingId + "/recording").header("Authorization", "Bearer " + ownerToken))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.data.status").value("RECORDING"));
+
         MockMultipartFile audio = new MockMultipartFile("file", "meeting.mp3", "audio/mpeg", new byte[] {4, 5, 6});
         MvcResult audioResult = mockMvc.perform(multipart("/api/meetings/" + meetingId + "/audio")
                 .file(audio)

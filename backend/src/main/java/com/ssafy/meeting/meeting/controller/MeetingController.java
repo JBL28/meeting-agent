@@ -44,6 +44,11 @@ public class MeetingController {
         return ApiResponse.success(meetingService.get(meetingId, principal.getId()));
     }
 
+    @PostMapping("/api/meetings/{meetingId}/recording")
+    public ApiResponse<MeetingResponse> markRecording(@PathVariable Long meetingId, @AuthenticationPrincipal UserPrincipal principal) {
+        return ApiResponse.success(meetingService.markRecording(meetingId, principal.getId()));
+    }
+
     @PostMapping("/api/meetings/{meetingId}/participants")
     public ApiResponse<MeetingParticipantResponse> addParticipant(
         @PathVariable Long meetingId,

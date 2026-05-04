@@ -78,6 +78,15 @@ public class MeetingService {
     }
 
     @Transactional
+    public MeetingResponse markRecording(Long meetingId, Long requesterId) {
+        Meeting meeting = findMeeting(meetingId);
+        permissionEvaluator.requireRole(meeting.getTeam().getId(), requesterId, TeamRole.MEMBER);
+        meeting.markRecording();
+        log.info("Meeting recording started meetingId={} requesterId={}", meetingId, requesterId);
+        return MeetingResponse.of(meeting, participants(meetingId));
+    }
+
+    @Transactional
     public MeetingParticipantResponse addParticipant(Long meetingId, Long requesterId, MeetingParticipantRequest request) {
         Meeting meeting = findMeeting(meetingId);
         TeamMember requesterMembership = permissionEvaluator.requireRole(meeting.getTeam().getId(), requesterId, TeamRole.MEMBER);

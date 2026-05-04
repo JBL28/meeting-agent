@@ -67,6 +67,10 @@ public class Meeting {
         this.status = MeetingStatus.RECORDED;
     }
 
+    public void markRecording() {
+        this.status = MeetingStatus.RECORDING;
+    }
+
     public Long getId() { return id; }
     public Team getTeam() { return team; }
     public String getTitle() { return title; }

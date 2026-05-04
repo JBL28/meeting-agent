@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { FormField } from '@/components/form-field';
 import { Button } from '@/components/ui/button';
@@ -62,6 +63,9 @@ export default function MeetingDetailPage() {
       <section>
         <h1 className="text-3xl font-bold">{meeting.title}</h1>
         <p className="mt-2 text-slate-500">Status: <strong>{meeting.status}</strong> - Team ID: {meeting.teamId}</p>
+        <Link className="mt-4 inline-flex text-sm font-medium text-slate-700 underline" href={`/meetings/${meetingId}/record`}>
+          Open browser recorder
+        </Link>
       </section>
       {message ? <p className="rounded-md bg-green-50 p-3 text-sm text-green-700">{message}</p> : null}
       {error ? <p className="rounded-md bg-red-50 p-3 text-sm text-red-600">{error}</p> : null}
