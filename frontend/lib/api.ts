@@ -14,7 +14,9 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:8
 export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
   const token = typeof window !== 'undefined' ? window.localStorage.getItem('accessToken') : null;
   const headers = new Headers(init.headers);
-  headers.set('Content-Type', headers.get('Content-Type') ?? 'application/json');
+  if (!(init.body instanceof FormData)) {
+    headers.set('Content-Type', headers.get('Content-Type') ?? 'application/json');
+  }
   if (token) {
     headers.set('Authorization', `Bearer ${token}`);
   }

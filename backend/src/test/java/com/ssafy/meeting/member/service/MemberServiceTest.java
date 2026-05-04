@@ -35,11 +35,11 @@ class MemberServiceTest {
         when(passwordEncoder.encode("password123")).thenReturn("hashed");
         when(memberRepository.save(any(Member.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Member member = memberService.register(" User@Example.COM ", "password123", " ??? ");
+        Member member = memberService.register(" User@Example.COM ", "password123", " User ");
 
         assertThat(member.getEmail()).isEqualTo("user@example.com");
         assertThat(member.getPassword()).isEqualTo("hashed");
-        assertThat(member.getName()).isEqualTo("???");
+        assertThat(member.getName()).isEqualTo("User");
         ArgumentCaptor<Member> captor = ArgumentCaptor.forClass(Member.class);
         verify(memberRepository).save(captor.capture());
         assertThat(captor.getValue().getEmail()).isEqualTo("user@example.com");

@@ -26,22 +26,22 @@ export default function LoginPage() {
       setSession(response.member, response.accessToken);
       router.push('/teams');
     } catch (exception) {
-      setError(exception instanceof Error ? exception.message : '???? ??????.');
+      setError(exception instanceof Error ? exception.message : 'Login failed.');
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <AuthCard title="???" description="JWT ?? ? ? ?? ???? ?????.">
+    <AuthCard title="Login" description="Get a JWT and continue to team management.">
       <form className="space-y-4" onSubmit={onSubmit}>
-        <FormField label="???" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-        <FormField label="????" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
+        <FormField label="Email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+        <FormField label="Password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
         {error ? <p className="rounded-md bg-red-50 p-3 text-sm text-red-600">{error}</p> : null}
-        <Button className="w-full" disabled={loading}>{loading ? '??? ?...' : '???'}</Button>
+        <Button className="w-full" disabled={loading}>{loading ? 'Signing in...' : 'Login'}</Button>
       </form>
       <p className="mt-4 text-center text-sm text-slate-500">
-        ??? ???? <Link className="font-semibold text-primary" href="/register">????</Link>
+        Need an account? <Link className="font-semibold text-primary" href="/register">Register</Link>
       </p>
     </AuthCard>
   );

@@ -20,7 +20,7 @@ export default function NewTeamPage() {
       const team = await createTeam({ name });
       router.push(`/teams/${team.id}/settings`);
     } catch (exception) {
-      setError(exception instanceof Error ? exception.message : '? ??? ??????.');
+      setError(exception instanceof Error ? exception.message : 'Could not create team.');
     } finally {
       setLoading(false);
     }
@@ -28,11 +28,11 @@ export default function NewTeamPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-6 py-10">
-      <h1 className="text-3xl font-bold">? ??</h1>
+      <h1 className="text-3xl font-bold">New Team</h1>
       <form className="mt-8 space-y-4 rounded-2xl border bg-white p-6 shadow-sm" onSubmit={onSubmit}>
-        <FormField label="? ??" value={name} onChange={(event) => setName(event.target.value)} required maxLength={200} />
+        <FormField label="Team name" value={name} onChange={(event) => setName(event.target.value)} required maxLength={200} />
         {error ? <p className="rounded-md bg-red-50 p-3 text-sm text-red-600">{error}</p> : null}
-        <Button disabled={loading}>{loading ? '?? ?...' : '? ??'}</Button>
+        <Button disabled={loading}>{loading ? 'Creating...' : 'Create Team'}</Button>
       </form>
     </main>
   );

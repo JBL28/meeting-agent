@@ -17,9 +17,9 @@ describe('TeamMemberList', () => {
 
   it('shows invite button only for admin or owner', () => {
     const { rerender } = render(<TeamMemberList members={members} myRole="VIEWER" />);
-    expect(screen.queryByRole('button', { name: '?? ??' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Invite Member' })).not.toBeInTheDocument();
 
     rerender(<TeamMemberList members={members} myRole="ADMIN" />);
-    expect(screen.getByRole('button', { name: '?? ??' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Invite Member' })).toBeInTheDocument();
   });
 });
